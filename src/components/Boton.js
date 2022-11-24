@@ -17,6 +17,8 @@ const Boton = styled.button`
     color: #fff;
   }
 `;
+export default Boton;
+
 
 export const BotonInicio = styled.button`
   border-radius: .6rem;
@@ -32,4 +34,9 @@ export const BotonInicio = styled.button`
     color: #fff;
   }
 `;
-export default Boton;
+
+export const BotonInfo = styled.button`
+    border:none;
+    color: #777;
+    font-size: 2rem;
+`;

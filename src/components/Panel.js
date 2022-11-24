@@ -6,7 +6,7 @@ const Panel = styled.div`
   border-radius: 0.25rem;
   margin: 0.5rem;
   padding: 0.5rem;
-  
+  background-color:#fff;
   
 `;
 export default Panel;
