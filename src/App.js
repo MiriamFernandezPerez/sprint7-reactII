@@ -1,7 +1,7 @@
-import './App.css';
 import React, {useState} from 'react';
 import Checkbox from './components/Checkbox';
 import Panel from './components/Panel';
+import Boton from './components/Boton';
 
 function App() {
 
@@ -9,9 +9,8 @@ function App() {
   const [isChecked, setChecked] = useState(false);
   let [paginas, setPaginas] = useState(0);
   let [idiomas, setIdiomas] = useState(0);
-  
   let totalExtras = (paginas + idiomas) * 30;
-  console.log(totalExtras);
+  
 
   const handleInputChange = (event) => {
     const {name, value, checked} = event.target;
@@ -42,10 +41,31 @@ function App() {
     }else{
       setIdiomas( idiomas = Number(value) );
     }
-        
-    
   }
 
+  const handleClick = (event) =>{
+    event.preventDefault();
+    const {name} = event.target;
+    switch (name){
+      case 'masPaginas':
+        setPaginas(paginas = paginas+1);
+        break;
+      case 'menosPaginas':
+        if (paginas > 0){
+          setPaginas(paginas = paginas-1);
+        }
+        break;
+      case 'masIdiomas':
+        setIdiomas(idiomas = idiomas+1);
+        break;
+      case 'menosIdiomas':
+        if (idiomas > 0){
+          setIdiomas(idiomas = idiomas-1);
+        }
+    }
+  }
+
+  console.log('Paginas '+paginas, 'Idiomas '+ idiomas);
   return (
     <div className="App">
       <div className='container'>
@@ -56,11 +76,15 @@ function App() {
           { (isChecked) && <Panel>
             <div>
               <label className="me-2" htmlFor="paginas">Número de páginas</label>
-              <input className="form-control d-inline w-25" name="paginas" id="paginas" type="number" min={0} onChange={handleNumberChange} />
+              <Boton name="masPaginas" onClick={handleClick}>+</Boton>
+              <input className="form-control d-inline w-25 text-center" name="paginas" id="paginas" type="number" min={0} onChange={handleNumberChange} value={paginas} />
+              <Boton name="menosPaginas" onClick={handleClick}>-</Boton>
             </div>
             <div>
               <label className="me-2" htmlFor="idiomas">Número de idiomas</label>
-              <input className="form-control d-inline w-25 mt-2" name="idiomas" id="idiomas" type="number" min={0} onChange={handleNumberChange} />
+              <Boton name="masIdiomas" onClick={handleClick}>+</Boton>
+              <input className="form-control d-inline w-25 mt-2 text-center" name="idiomas" id="idiomas" type="number" min={0} onChange={handleNumberChange} value={idiomas} />
+              <Boton name="menosIdiomas" onClick={handleClick}>-</Boton>
             </div>
           </Panel>}
 
