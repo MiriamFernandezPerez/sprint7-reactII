@@ -1,6 +1,6 @@
 import React from "react";
 import{Link} from "react-router-dom";
-import {BotonInicio} from '../components/Boton';
+import BotonInicio from '../components/BotonInicio/BotonInicio';
 import '../App.css';
 
 const Home = () => {
@@ -14,7 +14,7 @@ const Home = () => {
                 <p>En esta página podrás elaborar presupuestos para tus desarrollos Web</p>
 
                 <Link to='/Presupuestos'>
-                    <BotonInicio>Calcular presupuesto</BotonInicio>
+                    <BotonInicio textBtnInicio="Calcular presupuesto" className="btn-submit" type="button" ></BotonInicio>
                 </Link>
             </div>        
         </div>
