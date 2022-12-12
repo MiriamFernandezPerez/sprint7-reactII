@@ -6,7 +6,6 @@ import BotonInfo from '../components/BotonInfo/BotonInfo';
 import BotonInicio from '../components/BotonInicio/BotonInicio';
 import ModalStyle from '../components/Modal/Modal.styles';
 import Lista from '../components/Tabla/Lista';
-import ListaStyle from '../components/Tabla/Lista.styles';
 
 function App() {
     
@@ -22,7 +21,7 @@ function App() {
   let [nombrePto, setNombrePto] = useState(localStorage.getItem('nombrePto') ? (localStorage.getItem('nombrePto')) : '');
   let [cliente, setCliente] = useState (localStorage.getItem('cliente') ? (localStorage.getItem('cliente')) : '');
   let [totalExtras, setTotalExtras] = useState(JSON.parse(localStorage.getItem('totalExtras')) ? JSON.parse(localStorage.getItem('totalExtras')) : 0);
-  
+  let [id, setId] = useState(JSON.parse(localStorage.getItem('id')) ? JSON.parse(localStorage.getItem('id')) : 0);
   let fecha = new Date();
   let date = (fecha.getDate() + "/" + (fecha.getMonth() +1) + "/" + fecha.getFullYear())
   
@@ -45,10 +44,11 @@ function App() {
       localStorage.setItem('cliente', cliente);
       localStorage.setItem('totalExtras',totalExtras);
       localStorage.setItem('date', date);
+      localStorage.setItem('id', id);
     } catch (error){
       console.error(error);
     }
-  },[total, paginas, idiomas, webChecked, seoChecked, adsChecked, nombrePto, cliente, totalExtras, date]);
+  },[total, paginas, idiomas, webChecked, seoChecked, adsChecked, nombrePto, cliente, totalExtras, date, id]);
   
 
   const handleInputChange = (event) => {
@@ -126,7 +126,6 @@ function App() {
   }
   
   const handleModal = (event) =>{
-    //console.log('funciona');
     event.preventDefault();
     
     const {id} = event.target;
@@ -145,15 +144,15 @@ function App() {
     } 
   }
 
-
   
-
   const guardarPresupuesto = () => {
-
+    setId( id = parseInt(id = id + 1));
+    
     presupuestos =
       window.localStorage.getItem("presupuestos") === null ? [] : JSON.parse(window.localStorage.getItem("presupuestos"));
 
     const presupuesto = {
+      id: window.localStorage.getItem("id"),
       nombrePresupuesto: window.localStorage.getItem("nombrePto"),
       nombreCliente: window.localStorage.getItem("cliente"),
       web: window.localStorage.getItem("webChecked"),
@@ -165,8 +164,11 @@ function App() {
       total: window.localStorage.getItem("total"),
       totalExtras: window.localStorage.getItem("totalExtras")
     };
+    
+    
 
     presupuestos.push(presupuesto);
+    
     console.log(presupuestos);
     window.localStorage.setItem("presupuestos", JSON.stringify(presupuestos));
     window.location. reload();
@@ -239,9 +241,7 @@ function App() {
                 </div>
                 <div className="col-md-7">
                 
-                     <Lista></Lista>                                                  
-                    
-                    
+                  <Lista></Lista>                                                  
                 
                 </div>
             </div>

@@ -9,13 +9,14 @@ const Lista = ( presupuestos) => {
       
     console.log(presupuestos);
     console.log(localStorage);
+    
     return (
         <div>
-            {presupuestos.map(data => {
+            {presupuestos.map( (data) => {
     
                 return <ListaStyle>
                     <h5>Presupuesto: {data.nombrePresupuesto}</h5>
-                    <li>
+                    <li  key={data.id}>
                         <ul>Nombre cliente: {data.nombreCliente}</ul>
                         
                         <ul>Número de páginas: {data.paginas}</ul>
