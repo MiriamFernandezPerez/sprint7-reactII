@@ -14,9 +14,10 @@ const Lista = ( presupuestos) => {
         <div>
             {presupuestos.map( (data) => {
     
-                return <ListaStyle>
+                return <ListaStyle key={data.id}>
+                    
                     <h5>Presupuesto: {data.nombrePresupuesto}</h5>
-                    <li  key={data.id}>
+                    <li>
                         <ul>Nombre cliente: {data.nombreCliente}</ul>
                         
                         <ul>Número de páginas: {data.paginas}</ul>
