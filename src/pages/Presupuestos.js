@@ -179,7 +179,7 @@ function App() {
   return (
     <div className="App">
       <div className='container-fluid m-5 p-5'>
-        {(modal && <ModalStyle className='p-5 d-flex align-content-center' id="container" onClick={handleGrey}>
+        {(modal && <ModalStyle className='p-5 d-flex align-content-center align-items-center' id="container" onClick={handleGrey}>
           <PanelStyle className='m-5'>
             {(modalPag &&
               <>

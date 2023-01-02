@@ -9,6 +9,7 @@ const BotonInicio = styled.button`
   font-size: 1rem;
   font-weight:bolder;
   text-align:center;
+  margin: 0 .3rem;
   &:hover{
     background-color: #dd4f08;
     color: #fff;
