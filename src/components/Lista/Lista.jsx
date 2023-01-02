@@ -1,43 +1,21 @@
 import ListaStyle from './Lista.styles';
-import BotonInicio from '../BotonInicio/BotonInicio';
+
 
 const Lista = ( presupuestos) => {
 //   const {nombrePresupuesto, nombreCliente, web, seo, ads, paginas, idiomas, total, totalExtras, fecha } = presupuestos;
-    presupuestos = window.localStorage.getItem("presupuestos") === null ? [] : JSON.parse(window.localStorage.getItem("presupuestos"));
+
+  presupuestos =
+      window.localStorage.getItem("presupuestos") === null ? [] : JSON.parse(window.localStorage.getItem("presupuestos"));
+      
     console.log(presupuestos);
     console.log(localStorage);
-
-    const handleAlfab = (event) => {
-        event.preventDefault();
-        const { id } = event.target;
-        if (id == 'container') {
-        
-        }
-    }
-
-    const handleFecha = (event) => {
-        event.preventDefault();
-        const { id } = event.target;
-        if (id == 'container') {
-        
-        }
-    }
-
-    const handleReinicio = (event) => {
-        event.preventDefault();
-        const { id } = event.target;
-        if (id == 'container') {
-        }
-    }
-
-
     
     return (
         <div>
             {presupuestos.map( (data) => {
     
                 return <ListaStyle key={data.id}>
-
+                    
                     <h5>Presupuesto: {data.nombrePresupuesto}</h5>
                     <li>
                         <ul>Nombre cliente: {data.nombreCliente}</ul>
