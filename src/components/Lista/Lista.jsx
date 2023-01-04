@@ -3,9 +3,9 @@ import BotonOrdenar from '../BotonOrdenar/BotonOrdenar';
 import { useState } from 'react';
 
 const Lista = (presupuestos) => {
-    let [mostrarLista, setMostrarLista] = useState('');
 
     presupuestos = window.localStorage.getItem("presupuestos") === null ? [] : JSON.parse(window.localStorage.getItem("presupuestos"));
+    let [mostrarLista, setMostrarLista] = useState(presupuestos);
     let listaOrdenada =[...presupuestos];
     
     const handleOrdenar = (event) => {
