@@ -27,10 +27,7 @@ function App() {
 
 
   let presupuestos = [];
-
-  //  console.log(webChecked, seoChecked, adsChecked);
-  //  console.log(paginas, idiomas);
-  //  console.log(nombrePto, cliente);
+  //let [presupuestos, setPresupuestos] = useState(localStorage.getItem('nombrePto') ? (localStorage.getItem('nombrePto')) : '');
 
   useEffect(() => {
     try {
@@ -148,8 +145,7 @@ function App() {
   const guardarPresupuesto = () => {
     setId(id = parseInt(id = id + 1));
 
-    presupuestos =
-      window.localStorage.getItem("presupuestos") === null ? [] : JSON.parse(window.localStorage.getItem("presupuestos"));
+    presupuestos = window.localStorage.getItem("presupuestos") === null ? [] : JSON.parse(window.localStorage.getItem("presupuestos"));
 
     const presupuesto = {
       id: window.localStorage.getItem("id"),
@@ -165,8 +161,6 @@ function App() {
       totalExtras: window.localStorage.getItem("totalExtras")
     };
 
-
-
     presupuestos.push(presupuesto);
 
     console.log(presupuestos);
@@ -174,7 +168,6 @@ function App() {
     window.location.reload();
 
   }
-
 
   return (
     <div className="App">
@@ -233,14 +226,15 @@ function App() {
               <div>
                 <Checkbox name="ads" id="ads" value={200} onChange={handleInputChange} label="Una campaña de Google Ads (200€)" checked={eval(adsChecked)}></Checkbox>
               </div>
+              <div className="col-md-12 text-start">
+                <p>Precio: {total + totalExtras} </p>
+              </div>
+              <BotonInicio textBtnInicio="Guardar presupuesto" onClick={guardarPresupuesto}></BotonInicio>
             </form>
-            <div className="col-md-12 text-start">
-              <p>Precio: {total + totalExtras} </p>
-            </div>
-            <BotonInicio textBtnInicio="Guardar presupuesto" onClick={guardarPresupuesto}></BotonInicio>
+
           </div>
           <div className="col-md-7">
-
+            <h4 className='mb-3'>Presupuestos Guardados</h4>
             <Lista></Lista>
 
           </div>

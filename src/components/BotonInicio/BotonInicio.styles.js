@@ -6,6 +6,7 @@ const BotonInicio = styled.button`
   background-color: #ea6a2a;
   color: #fff;
   padding:1rem;
+  margin: 0 0.3rem;
   font-size: 1rem;
   font-weight:bolder;
   text-align:center;

@@ -1,45 +1,60 @@
 import ListaStyle from './Lista.styles';
+import BotonOrdenar from '../BotonOrdenar/BotonOrdenar';
+import { useState } from 'react';
 
-import BotonInicio from '../BotonInicio/BotonInicio';
-
-const Lista = ( presupuestos) => {
-//   const {nombrePresupuesto, nombreCliente, web, seo, ads, paginas, idiomas, total, totalExtras, fecha } = presupuestos;
-
-  presupuestos =
-      window.localStorage.getItem("presupuestos") === null ? [] : JSON.parse(window.localStorage.getItem("presupuestos"));
+const Lista = (presupuestos) => {
+    let [mostrarLista, setMostrarLista] = useState('');
 
     presupuestos = window.localStorage.getItem("presupuestos") === null ? [] : JSON.parse(window.localStorage.getItem("presupuestos"));
-    console.log(presupuestos);
-    console.log(localStorage);
+    let listaOrdenada =[...presupuestos];
+    
+    const handleOrdenar = (event) => {
+        const { name } = event.target;
+        console.log(name);
 
-    const handleAlfab = (event) => {
-        event.preventDefault();
-        const { id } = event.target;
-        if (id == 'container') {
-
+        if (name === "alfa") {
+            listaOrdenada.sort(function (a, b) {
+                if (a.nombrePresupuesto > b.nombrePresupuesto) {
+                return 1;
+                }
+                if (a.nombrePresupuesto < b.nombrePresupuesto) {
+                return -1;
+                }
+                return 0;
+            });
         }
+        else if (name === "fecha") {
+            listaOrdenada.sort(function (a, b) {
+                if (a.fecha > b.fecha) {
+                return 1;
+                }
+                if (a.fecha < b.fecha) {
+                return -1;
+                }
+                return 0;
+            });
+        }else {
+            listaOrdenada.sort(function (a, b) {
+                if (a.id > b.id) {
+                return 1;
+                }
+                if (a.id < b.id) {
+                return -1;
+                }
+                return 0;
+            });
+        }
+        setMostrarLista(mostrarLista = listaOrdenada);
     }
 
-    const handleFecha = (event) => {
-        event.preventDefault();
-        const { id } = event.target;
-        if (id == 'container') {
-
-        }
-    }
-
-    const handleReinicio = (event) => {
-        event.preventDefault();
-        const { id } = event.target;
-        if (id == 'container') {
-        }
-    }
-
-
-
+  
     return (
         <div>
-            {presupuestos.map( (data) => {
+            <BotonOrdenar textBtnInicio="Orden alfabético" onClick={handleOrdenar} name="alfa"></BotonOrdenar>
+            <BotonOrdenar textBtnInicio="Orden por fecha" onClick={handleOrdenar} name="fecha"></BotonOrdenar>
+            <BotonOrdenar textBtnInicio="Reiniciar Listado" onClick={handleOrdenar} name="id"></BotonOrdenar>
+            { 
+                mostrarLista.map( (data) => {
 
                 return <ListaStyle key={data.id}>
                     
