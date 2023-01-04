@@ -6,6 +6,7 @@ import BotonInfo from '../components/BotonInfo/BotonInfo';
 import BotonInicio from '../components/BotonInicio/BotonInicio';
 import ModalStyle from '../components/Modal/Modal.styles';
 import Lista from '../components/Lista/Lista';
+import { useSearchParams } from 'react-router-dom';
 
 function App() {
 
@@ -24,10 +25,9 @@ function App() {
   let [id, setId] = useState(JSON.parse(localStorage.getItem('id')) ? JSON.parse(localStorage.getItem('id')) : 0);
   let fecha = new Date();
   let date = (fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/" + fecha.getFullYear())
-
+  const [params, setParams] = useSearchParams();
 
   let presupuestos = [];
-  //let [presupuestos, setPresupuestos] = useState(localStorage.getItem('nombrePto') ? (localStorage.getItem('nombrePto')) : '');
 
   useEffect(() => {
     try {
@@ -42,11 +42,11 @@ function App() {
       localStorage.setItem('totalExtras', totalExtras);
       localStorage.setItem('date', date);
       localStorage.setItem('id', id);
+      setParams({ web: webChecked, seo: seoChecked, ads: adsChecked, paginas: paginas, idiomas: idiomas });
     } catch (error) {
       console.error(error);
     }
-  }, [total, paginas, idiomas, webChecked, seoChecked, adsChecked, nombrePto, cliente, totalExtras, date, id]);
-
+  }, [total, paginas, idiomas, webChecked, seoChecked, adsChecked, nombrePto, cliente, totalExtras, date, id, setParams]);
 
   const handleInputChange = (event) => {
     const { name, value, checked, id } = event.target;
@@ -59,7 +59,6 @@ function App() {
     if (name == 'web') {
       checked ? setWebChecked(webChecked = true) : setWebChecked(webChecked = false);
     }
-    console.log(webChecked);
 
     //Si el onChange es en Seo
     if (name == 'seo') {
@@ -168,6 +167,8 @@ function App() {
     window.location.reload();
 
   }
+
+
 
   return (
     <div className="App">
