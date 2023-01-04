@@ -1,5 +1,6 @@
 import ListaStyle from './Lista.styles';
 import BotonOrdenar from '../BotonOrdenar/BotonOrdenar';
+import InputBuscar from '../InputBuscar/InputBuscar';
 import { useState } from 'react';
 
 const Lista = (presupuestos) => {
@@ -7,6 +8,7 @@ const Lista = (presupuestos) => {
     presupuestos = window.localStorage.getItem("presupuestos") === null ? [] : JSON.parse(window.localStorage.getItem("presupuestos"));
     let [mostrarLista, setMostrarLista] = useState(presupuestos);
     let listaOrdenada =[...presupuestos];
+    
     
     const handleOrdenar = (event) => {
         const { name } = event.target;
@@ -46,6 +48,19 @@ const Lista = (presupuestos) => {
         }
         setMostrarLista(mostrarLista = listaOrdenada);
     }
+    
+    const handleBuscar = (event) =>{
+        const busqueda = event.target.value;
+    
+        let resultBusqueda = listaOrdenada.filter ((lista) => {
+            if (lista.nombrePresupuesto.toLowerCase( ).includes (busqueda.toLowerCase( ))) {
+            return true;
+            }
+            return false;
+        });
+    
+        setMostrarLista(mostrarLista = resultBusqueda);
+    }
 
   
     return (
@@ -53,6 +68,7 @@ const Lista = (presupuestos) => {
             <BotonOrdenar textBtnInicio="Orden alfabético" onClick={handleOrdenar} name="alfa"></BotonOrdenar>
             <BotonOrdenar textBtnInicio="Orden por fecha" onClick={handleOrdenar} name="fecha"></BotonOrdenar>
             <BotonOrdenar textBtnInicio="Reiniciar Listado" onClick={handleOrdenar} name="id"></BotonOrdenar>
+            <InputBuscar name="buscar" id="buscar" onChange={handleBuscar}></InputBuscar>
             { 
                 mostrarLista.map( (data) => {
 
